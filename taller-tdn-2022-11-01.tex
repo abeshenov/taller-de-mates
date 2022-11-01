@@ -1,0 +1,373 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb}
+
+\usepackage[spanish]{babel}
+
+\usepackage{amsthm}
+
+\usepackage{tikz}
+
+\theoremstyle{plain}
+\newtheorem{ejercicio}{Ejercicio}
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\begin{document}
+
+\begin{ejercicio}
+% Purple Comet MS 2011, Problem 7
+Al dividir $12^{18}$ entre $18^{12}$ queda $\left(\frac{m}{n}\right)^3$,
+donde $m$ y $n$ son coprimos. Encuentre $m - n$.
+
+\ifdefined\solutions
+\begin{solucion}
+    Factorizando:
+    \[
+        \frac{12^{18}}{18^{12}} =
+        \left(\frac{12^6}{18^4}\right)^3 =
+        \left(\frac{12^6}{18^4}\right)^3 =
+        \left(\frac{2^{12}\cdot 3^6}{2^4\cdot 3^8}\right)^3 =
+        \left(\frac{2^8}{3^2}\right)^3 =
+        \left(\frac{256}{9}\right)^3.
+    \]
+    Así $m - n = 256 - 9 = 247$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% Purple Comet MS 2017, Problem 5
+Encuentre el divisor más grande impar de $160^3$.
+
+\ifdefined\solutions
+\begin{solucion}
+    $160^3 = 2^{15}\cdot 5^3$. El divisor más grande impar es $5^3 = 125$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% Purple Comet MS 2017, Problem 7
+Encuentre el número de enteros positivos menores de $100$ que dividen a $300$.
+
+\ifdefined\solutions
+\begin{solucion}
+    Factorizamos $300 = 2^2\cdot 3\cdot 5^2$.
+
+    Es más fácil contar los divisores $\ge 100$: estos son $100$, $150$, $300$.
+    
+    En total hay $(2 + 1)\,(1 + 1)\,(2 + 1) = 18$ divisores positivos,
+    así la respuesta es $18 - 3 = 15$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% UW-Whitewater Middle School Mathematics Meet 2004, Problem 6
+
+¿Cuántos divisores positivos tiene el número
+$10! = 3628800$?
+
+\ifdefined\solutions
+\begin{solucion}        
+    Tenemos
+    \begin{align*}
+        10! & = 2\cdot 3\cdot 4\cdot 5\cdot 6\cdot 7\cdot 8\cdot 9\cdot 10 \\
+            & = 2^8\cdot 3^4\cdot 5^2\cdot 7.
+    \end{align*}
+    
+    Entonces, el número de divisores positivos será
+    \[ d (10!) = 9\cdot 5\cdot 3\cdot 2 = 270. \qedhere \]
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% Purple Comet MS 2017, Problem 13
+Encuentre el número de divisores positivos de $20^{17}$ que son cuadrados
+o cubos perfectos.
+
+\ifdefined\solutions
+\begin{solucion}
+    $20^{17} = 2^{34}\cdot 5^{17}$, y los divisores son $2^a\cdot 5^b$, donde
+    $0 \le a \le 34$ y $0 \le b \le 17$.
+    
+    Un cuadrado perfecto sería $2^a\cdot 5^b$ con $a$ y $b$ par.
+    Hay $18 \times 9 = 162$ posibilidades.
+    
+    Un cubo perfecto sería $2^a\cdot 5^b$ con $a$ y $b$ divisibles entre $3$.
+    Para $a$ hay $\lfloor\frac{34}{3}\rfloor + 1 = 12$ opciones, y para $b$ hay
+    $\lfloor\frac{17}{3}\rfloor + 1 = 6$ opciones.
+    En total son $12\cdot 6 = 72$ opciones.
+    
+    También hay números que son cuadrados y cubos al mismo tiempo: son los
+    números con $a$ y $b$ divisibles entre $6$. De estos habrá $6\cdot 3 = 18$.
+    
+    Entonces, la respuesta es $162 + 72 - 18 = 216$.
+
+    Este conteo es un ejemplo del principio combinatorio de
+    \textbf{inclusión-exclusión}.
+
+    \begin{center}
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm]
+            \begin{scope}[blend group = soft light]
+                \fill[green!30!white] (180:1.2) circle (2);
+                \fill[red!30!white] (0:1.2) circle (2);
+            \end{scope}
+            \node at (180:2) {$a^2$};
+            \node at (0:2) {$b^3$};
+            \node {$c^6$};
+
+            \draw (180:1.2) circle (2);
+            \draw (0:1.2) circle (2);
+        \end{tikzpicture}
+    \end{center}    
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% UW-Whitewater Middle School Mathematics Meet 2004, Problem 9
+¿Cuántos enteros positivos $n < 200$ son coprimos con $15$ o $24$?
+
+\ifdefined\solutions
+\begin{solucion}
+    Tenemos $15 = 3\cdot 5$ y $24 = 2^3\cdot 3$. Entonces, queremos contar los
+    números $1 \le n < 200$ tales que $2, 3, 5 \nmid n$.
+    
+    Podríamos considerar las factorizaciones $p_1^{e_1}\cdots p_s^{e_s}$ con
+    $p_1, \ldots, p_s$ primos distintos de $2, 3, 5$. En este caso necesitamos
+    enumerar los primos $p < 200$. No es muy difícil con la criba de Eratóstenes,
+    pero es un trabajo tedioso y nos podemos equivocar en algún momento.
+    Además, tendremos que verificar la cota $p_1^{e_1}\cdots p_s^{e_s} < 200$.
+
+    Sería más fácil encontrar los números que \emph{no son} coprimos con $15$ o $24$.
+    Estos son los números divisibles entre $2$, $3$, $5$:
+    \begin{align*}
+        \text{divisibles entre }2\colon & 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, \ldots \\
+        \text{divisibles entre }3\colon & 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, \ldots \\
+        \text{divisibles entre }5\colon & 5, 10, 15, 20, 25, 30, \ldots
+    \end{align*}
+    Hay repeticiones entre las listas de arriba, así hay que contar los números
+    con cuidado, utilizando la \textbf{inclusión-exclusión}. La fórmula será
+    \begin{gather*}
+        (\text{divisibles entre }2) + (\text{divisibles entre }3) + (\text{divisibles entre }5)\\
+        -\Bigl((\text{divisibles entre }6) + (\text{divisibles entre }10) + (\text{divisibles entre }15)\Bigr) \\
+        + (\text{divisibles entre }30).
+    \end{gather*}
+
+    \begin{center}
+    \begin{tikzpicture}[x=0.8cm,y=0.8cm]
+        \begin{scope}[blend group = soft light]            
+            \fill[red!30!white] (90:1.2) circle (2);
+            \fill[green!30!white] (210:1.2) circle (2);
+            \fill[blue!30!white] (330:1.2) circle (2);
+        \end{scope}
+        \node at (90:2) {$2 \mid n$};
+        \node at (210:2) {$3 \mid n$};
+        \node at (330:2) {$5 \mid n$};
+        \node at (30:1.5) {$10 \mid n$};
+        \node at (150:1.5) {$6 \mid n$};
+        \node at (-90:1.5) {$15 \mid n$};
+        \node {$30 \mid n$};
+
+        \draw (90:1.2) circle (2);
+        \draw (210:1.2) circle (2);
+        \draw (330:1.2) circle (2);
+    \end{tikzpicture}
+    \end{center}
+
+    Tenemos
+    \[
+        \left\lfloor\frac{199}{2}\right\rfloor + \left\lfloor\frac{199}{3}\right\rfloor + \left\lfloor\frac{199}{5}\right\rfloor
+        - \Bigl(\left\lfloor\frac{199}{6}\right\rfloor + \left\lfloor\frac{199}{10}\right\rfloor + \left\lfloor\frac{199}{15}\right\rfloor\Bigr)
+        + \left\lfloor\frac{199}{30}\right\rfloor.
+    \]
+
+    Calculamos:
+    \begin{gather*}
+        99 + 66 + 39 - (33 + 19 + 13) + 6 = 145.
+    \end{gather*}
+    
+    Estos son los números que \emph{no son} coprimos con $15$ y $24$.
+    La respuesta es $199 - 145 = 54$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% UW-Whitewater Middle School Mathematics Meet 2004, Problem 15
+Encuentre el primo $p$ tal que $p + 2500$ es un cuadrado.
+
+\ifdefined\solutions
+\begin{solucion}
+    Notamos que $2500 = 50^2$, así $p + 50^2 = x^2$. De aquí
+    \[ p = x^2 - 50^2 = (x - 50)\,(x + 50). \]
+    
+    Este número es primo, así el divisor más pequeño debe ser $x - 50 = 1$.
+    Entonces, $x = 51$ y $p = 51 + 50 = 101$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% UW-Whitewater Middle School Mathematics Meet 2004, Problem 19
+Encuentre $n$ tal que $n - 76$ y $n + 76$ son cubos de enteros positivos.
+
+\ifdefined\solutions
+\begin{solucion}
+    Escribamos
+    \[ n + 76 = x^3, \quad n - 76 = y^3, \]
+    donde $x, y \ge 1$. Podemos factorizar
+    \[ x^3 - y^3 = (x - y)\,(x^2 + xy + y^2) = 152. \]
+    Los divisores positivos de $152$ son $1, 2, 4, 8, 19, 38, 76, 152$.
+
+    Recordando que $x, y \ge 1$, se ve que $x^2 + xy + y^2$ no puede ser igual
+    a $1, 2, 4, 8$. Entonces, para el múltiplo $c = x - y$ se tiene
+    $c = 1, 2, 4, 8$.
+
+    Sustituyendo $y = x - c$, se obtiene
+    \[ 3c\,x^2 - 3c^2\,x + c^3 = 152. \]
+    En particular, $c^3 \equiv 2 \pmod{3}$, y por lo tanto $c \equiv 2 \pmod{3}$.
+    Esto nos deja como opciones $c = 2, 8$.
+
+    \begin{itemize}
+    \item Si $x - y = 8$, entonces $24x^2 - 192x + 512 = 152$, así
+        $3x^2 - 24x + 64 = 19$. De aquí $x = 3$ o $x = 5$.
+    
+        No podemos poner $x = 3$ porque en este caso $n = x^3 - 76$ es negativo,
+        y luego $y < 0$, pero no es el caso.
+
+        Si ponemos $x = 5$, entonces $n = x^3 - 76 = 49$. Ahora $n - 76$
+        es negativo, lo que significaría que $y$ es negativo.
+
+    \item Si $x - y = 2$, entonces nos queda $6x^2 - 12x + 8 = 152$.
+        Esto nos da la solución positiva $x = 6$, y luego $y = 4$.
+
+        $n + 76 = 6^3 = 216$ implica que $n = 140$.
+
+        $n - 76 = 4^3 = 64$ también implica que $n = 140$.
+    \end{itemize}
+
+    La respuesta es $n = 140$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% Centroamericana 2014, día 1, problema 1
+Encuentre el número más grande de la forma $pqr$, donde
+$p$, $q$, $r$ son diferentes primos y $p + q + r = 74$.
+
+\ifdefined\solutions
+\begin{solucion}
+    Si $p + q + r = 74$, entonces
+    $p + q + r \equiv 2 \pmod{4}$.
+    Si $p, q, r \ne 2$, se obtiene $p,q,r \equiv \pm 1$ $\pmod{4}$,
+    pero en este caso $p + q + r \not\equiv 2 \pmod{4}$.
+
+    Podemos suponer que $r = 2$.
+
+    Buscamos primos $p, q$ tales que $p + q = 72$.
+    Necesariamente $p < 36$ o $q < 36$.
+
+    De nuevo, podemos suponer que $p < 36$. Nos quedan los siguientes candidatos:
+    \[ p = 3, \boxed{5}, 7, \boxed{11}, \boxed{13}, 17, \boxed{19}, 23, \boxed{29}, \boxed{31}. \]
+
+    Aquí están subrayados los $p$ tales que $q = 72 - p$ es también primo.
+
+    Para obtener $pqr$ más grande posible, hay que tomar $(p,q) = (31,41)$.
+
+    La respuesta es $2\cdot 31\cdot 41 = 2542$.
+\end{solucion}
+\fi
+\end{ejercicio}
+
+\pagebreak
+
+\begin{ejercicio}
+% Purple Comet MS 2017, Problem 13
+Encuentre el entero más grande $k$ tal que $5^k$ divide al número
+$N = 2019! - 2018! + 2017!$.
+\end{ejercicio}
+
+Le podría servir la \textbf{fórmula de Legendre}: para un primo $p$,
+el número más grande $k$ tal que $p^k \mid n!$ es igual a
+\[
+    \left\lfloor\frac{n}{p}\right\rfloor +
+    \left\lfloor\frac{n}{p^2}\right\rfloor +
+    \left\lfloor\frac{n}{p^3}\right\rfloor +
+    \left\lfloor\frac{n}{p^4}\right\rfloor +
+    \cdots
+\]
+Aquí $\lfloor\frac{n}{p^e}\rfloor$ es la división con residuo de $n$ entre $p^e$
+(es decir, la división redondeado abajo). La suma continua hasta que $p^e > n$
+y los términos se vuelven nulos.
+
+\ifdefined\solutions
+\begin{solucion}
+    Primero vamos a explicar la fórmula de Legendre que mencionamos.
+    Por ejemplo, vamos a ver qué potencia de $2$ está en la factorización de
+    \[ 10! = 1\cdot 2\cdot 3\cdot 4\cdot 5\cdot 6\cdot 7\cdot 8\cdot 9\cdot 10. \]
+
+    Cada número par entre $1, 2, \ldots, 10$ contribuye un múltiplo $2$ en
+    la factorización. Hay $10/2 = 5$ números pares en esta lista.
+
+    Además, hay $\lfloor\frac{10}{4}\rfloor = 2$ números que son divisibles
+    entre $4$ (son $4$ y $8$). Cada de estos contribuye un $2$.
+
+    En fin, $8$ es divisible entre $2^3$, y de allí vendrá un múltiplo $2$.
+
+    No hay números divisibles entre $2^4$ porque $2^4 > 10$, así nuestro conteo
+    se acaba.
+
+    Juntando todo esto, la respuesta es
+    \[ 5 + 2 + 1 = 8. \]
+    De hecho,
+    \[ 10! = 2^8\cdot 3^4\cdot 5^2\cdot 7. \]
+
+    \begin{center}
+        * * *
+    \end{center}
+
+    Volviendo al problema, podemos factorizar:
+    \[ N = 2017! \cdot (2018\cdot 2019 - 2018 + 1) = 2017! \cdot (2018^2 + 1). \]
+
+    Primero calculamos la potencia mayor de $5$ que divide a $2017!$:
+
+    \[
+        \left\lfloor\frac{2017}{5}\right\rfloor +
+        \left\lfloor\frac{2017}{5^2}\right\rfloor +
+        \left\lfloor\frac{2017}{5^3}\right\rfloor +
+        \left\lfloor\frac{2017}{5^4}\right\rfloor =
+        403 + 80 + 16 + 3 = 502.
+    \]
+
+    Aquí tomamos los términos hasta $5^4$ porque $5^4 < 2017 < 5^5$.
+
+    Ahora
+    \[ 2018^2 + 1 = (2000 + 18)^2 + 1 \equiv 18^2 + 1 = 325 \pmod{1000}. \]
+    Aquí $325 = 5^2 \cdot 13$. Entonces, la potencia de $5$ que divide a
+    $2018^2 + 1$ es $2$.
+
+    La respuesta es $502 + 2 = 504$.
+\end{solucion}
+\fi
+
+\end{document}
