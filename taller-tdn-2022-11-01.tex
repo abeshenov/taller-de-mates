@@ -144,14 +144,8 @@ o cubos perfectos.
 \begin{solucion}
     Tenemos $15 = 3\cdot 5$ y $24 = 2^3\cdot 3$. Entonces, queremos contar los
     números $1 \le n < 200$ tales que $2, 3, 5 \nmid n$.
-    
-    Podríamos considerar las factorizaciones $p_1^{e_1}\cdots p_s^{e_s}$ con
-    $p_1, \ldots, p_s$ primos distintos de $2, 3, 5$. En este caso necesitamos
-    enumerar los primos $p < 200$. No es muy difícil con la criba de Eratóstenes,
-    pero es un trabajo tedioso y nos podemos equivocar en algún momento.
-    Además, tendremos que verificar la cota $p_1^{e_1}\cdots p_s^{e_s} < 200$.
 
-    Sería más fácil encontrar los números que \emph{no son} coprimos con $15$ o $24$.
+    Sería más fácil encontrar los números que \emph{no son} coprimos con $15$, ni con $24$.
     Estos son los números divisibles entre $2$, $3$, $5$:
     \begin{align*}
         \text{divisibles entre }2\colon & 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, \ldots \\
@@ -317,8 +311,8 @@ el número más grande $k$ tal que $p^k \mid n!$ es igual a
     \cdots
 \]
 Aquí $\lfloor\frac{n}{p^e}\rfloor$ es la división con residuo de $n$ entre $p^e$
-(es decir, la división redondeando abajo). La suma continua hasta que $p^e > n$
-y los términos se vuelven nulos.
+(es decir, la división redondeando hacía abajo). La suma continua hasta que
+$p^e > n$ y los términos se vuelvan nulos.
 
 \ifdefined\solutions
 \begin{solucion}
